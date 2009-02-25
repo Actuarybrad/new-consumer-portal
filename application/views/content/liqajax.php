@@ -4,14 +4,8 @@
  <hr class="space">
    <div class="alty">Select A Company:</div>
     <div class="dotstyle box">
-      <ul id="sidelist">
-      <?php foreach( $result as $row ):?>
-      <li><a href="#"><?= $row->co_name ?></a></li>
-      <?php endforeach; ?>
-      </ul>
+      <ul id="sidelist"></ul>
     </div>
-    <div class="span-8">      
-      <?php echo $this->pagination->render() ?>     
-    </div>
+    <div id="copage" class="span-8"></div>
 </div>
 <div id="tplfee" class="span-14 prepend-1 last"></div>	

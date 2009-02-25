@@ -1,9 +1,28 @@
 Ext.onReady(function() {
 
-Ext.BLANK_IMAGE_URL = 'http://localhost/kohana/media/images/default/s.gif';
+Ext.BLANK_IMAGE_URL = 'http://localhost/kohana/media/images/s.gif';
+
+var coStore = new Ext.data.JsonStore({
+    proxy: new Ext.data.HttpProxy({url:'http://localhost/kohana/media/php/company.php', method:'GET'}),
+    root: 'results',
+    fields: [
+	        'co_name',
+	        'co_naic'
+		]
+});
+
+coStore.load();
+
+var co = new Ext.XTemplate(
+'<tpl for=".">',
+'<li>',
+'<a class="tplco" href="#">{co_name}</a>',
+'</li>',
+'</tpl>'
+);
 
 var tplStore = new Ext.data.JsonStore({
-    proxy: new Ext.data.HttpProxy({url:'http://localhost/kohana/media/php/feeselect.php', method:'GET'}),
+    proxy: new Ext.data.HttpProxy({url:'http://localhost/kohana/media/php/feenaic.php', method:'GET'}),
     root: 'results',
     fields: ['co_key',
 	        'co_class_code',
@@ -206,6 +225,30 @@ function yesno(val){
 		return 'No';
 }
 
+var listco = new Ext.DataView({
+	id:'listco',
+	border:false,
+	renderTo: 'sidelist',
+	store: coStore,
+	tpl: co,
+	//autoHeight:true,
+	multiSelect: false,
+	singleSelect: true, 
+	emptyText: 'No images to display',
+	itemSelector:'a.tplco',
+	autoWidth:true,
+	listeners: {
+		click: {
+			fn: function(dv,num,node,e){
+				var b = listco.getRecord(node).get('co_naic');
+				tplStore.baseParams.co_naic = b;
+				tplStore.load();
+				//alert(b);
+			}
+		}
+	}
+});
+
 var invoice = new Ext.DataView({
 	id:'invoice',
 	border:false,
@@ -241,6 +284,7 @@ var invoice = new Ext.DataView({
 	}	
 });
 
+/*
 Ext.get('sidelist').on({
 click:{
 	delegate:'a',
@@ -253,5 +297,7 @@ click:{
 	}
 }
 });
+*/
+
 
 });
