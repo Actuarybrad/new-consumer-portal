@@ -11,6 +11,7 @@ class Website_Controller extends Template_Controller
 		   array('link'=>'rating','text'=>'<span>Ratings</span>','class'=>''),
 		   array('link'=>'fees','text'=>'<span>Filing Fees</span>','class'=>''),
 		   array('link'=>'liqfees','text'=>'<span>Liquid Fees</span>','class'=>''),
+		   array('link'=>'liqajax','text'=>'<span>Liquid Ajax</span>','class'=>''),
 		   array('link'=>'contact','text'=>'<span>Contact</span>','class'=>'')		  
 		 );    
     
